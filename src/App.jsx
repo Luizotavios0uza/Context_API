@@ -1,21 +1,25 @@
-import './App.css'
+import './App.css';
 
-import { Round } from './components/Round';
+import { Events } from './components/Events/Events'
 
-import { Square } from './components/Square';
+import { Texto } from './components/Input/TextInput'
 
-import { Triangle } from './components/Triangle'
+import { Botao } from './components/Button/Button'
 
 function App() {
     return (
     <div className="App">
-
-           <Round></Round>
-           <hr/>
-           <Square></Square>
-           <hr />
-           <Triangle></Triangle>
+        <Events></Events>
+        <Texto
+          label="Nome do produto"
+             id="nome_produto"
+                onChange={(alve) => console.log(alve.target.value)}/>
+        <br />
+        <Botao
+        label="Adicionar"
+        onClick={() => console.log("Clicou")}
+        ></Botao>
     </div>
-    )
+    );
 }
 export default App;
