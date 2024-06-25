@@ -1,6 +1,6 @@
 
 
-export function Texto({label, id, onChange}) {
+export function Texto({label, id, onChange, onBlur ,value}) {
 
 return(
     <>
@@ -9,6 +9,8 @@ return(
    type="text"
    id= {id}
    onChange={onChange}
+   value={value}
+   onBlur={onBlur}
    />
    </>
 )
