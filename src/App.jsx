@@ -10,73 +10,67 @@ import { useState } from 'react';
 
 import { Listas } from './components/ListaShop/ListaShop';
 
-import { Tela } from './components/Display';
-
 import { Login } from './components/Login';
 
 import { Error } from './components/Error/ErrorMessage';
+
+import { useEffect } from 'react';
+
+import { Cep } from './components/Cep/Cep';
+
+import { useOlaMundo } from './hook/useOlaMundo';
+
+import { useShoppingList } from './hook/useShoppingList';
+
+
 
 const produtos = []
 
 function App() {
 
-    const [listaProdutos, setlistaProdutos] = useState(produtos);
-    const [produto, setProduto] = useState("");
-    const [mensagemErro, setMensagemErro] = useState("");
+    const {
+        addProduct,
+        handleProductName,
+        listaProdutos,
+        mensagemErro,
+        produto,
+        validate,
+    } = useShoppingList();
 
     return (
-    <div className="App">
+        <div className="App">
 
-        <Events></Events>
+            <Events></Events>
+            <br />
+            <br />
 
-        <br />
-        <br />
+            <Error messagem={mensagemErro} />
+            <Texto
+                label="Nome do produto"
+                id="nome_produto"
+                value={produto}
+                onChange={handleProductName}
+                onBlur={validate}
+            />
 
-        <Error messagem={mensagemErro}/>
-        <Texto
-          label="Nome do produto"
-             id="nome_produto"
-             value={produto}
-                onChange={(alve) => setProduto(alve.target.value)}
-                onBlur={() => {
-                    if (produto === "") {
-                        return(
-                            console.log(mensagemErro),
-                            setMensagemErro("Preencha o nome do produto")
-                        )
-                    } 
-                    else {
-                        setMensagemErro("")
-                    }
-                }}
-                />
-                
-        <br />
+            <br />
 
-        <Botao
-        label="Adicionar"
-        onClick={() => {
-            if (produto !== "") {
-                return( 
-                    setlistaProdutos([...listaProdutos, produto])
-                )
-            }
-            else {
-                return(
-                setMensagemErro("Preencha o nome do produto"),
-                console.log(mensagemErro)
-                )
-            }
-        }}
-        ></Botao>
+            <Botao
+                label="Adicionar"
+                onClick={addProduct}
+            ></Botao>
 
-        <Listas items={listaProdutos}></Listas>
-        
-        <br />
+            <Listas items={listaProdutos}></Listas>
 
-        <Login></Login>
+            <br />
 
-    </div>
+            <Login></Login>
+
+            <br />
+
+            <Cep></Cep>
+
+        </div>
 
     );
 
