@@ -22,57 +22,43 @@ import { useOlaMundo } from './hook/useOlaMundo';
 
 import { useShoppingList } from './hook/useShoppingList';
 
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
+import { Cephook } from './Cephook/Cephook';
 
-const produtos = []
+import { ComponenteA } from './Component A/ComponentA';
+
+import { HelloWorld } from './MensagemOla/MensagemOla';
+
+import { Home } from './Home/Home';
+
+import { Sobre } from './Sobre/Sobre';
+
+import { ShoppingContext } from './Contexto/ShoppingContext';
+
+import { Contatar } from './Contato/Contato';
+
+const produtos = [];
 
 function App() {
-
-    const {
-        addProduct,
-        handleProductName,
-        listaProdutos,
-        mensagemErro,
-        produto,
-        validate,
-    } = useShoppingList();
-
+    const shopList = useShoppingList();
     return (
-        <div className="App">
-
-            <Events></Events>
-            <br />
-            <br />
-
-            <Error messagem={mensagemErro} />
-            <Texto
-                label="Nome do produto"
-                id="nome_produto"
-                value={produto}
-                onChange={handleProductName}
-                onBlur={validate}
-            />
-
-            <br />
-
-            <Botao
-                label="Adicionar"
-                onClick={addProduct}
-            ></Botao>
-
-            <Listas items={listaProdutos}></Listas>
-
-            <br />
-
-            <Login></Login>
-
-            <br />
-
-            <Cep></Cep>
-
-        </div>
-
+        <ShoppingContext.Provider value={shopList}>
+            <div className="App">
+                <Router>
+                    <nav className="Links">
+                        <Link to='/Home' className='link'>Home</Link>
+                        <Link to='/Sobre' className='link'>Sobre</Link>
+                        <Link to='/Contato' className='link'>Contatar</Link>
+                    </nav>
+                    <Routes>
+                        <Route path='/Home' element={<Home />} />
+                        <Route path='/Sobre' element={<Sobre />} />
+                        <Route path='/Contato' element={<Contatar />} />
+                    </Routes>
+                </Router>
+            </div>
+        </ShoppingContext.Provider>
     );
-
 }
 export default App;

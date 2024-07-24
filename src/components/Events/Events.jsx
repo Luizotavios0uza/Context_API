@@ -6,8 +6,7 @@ export function Events() {
     const [contador, setContador] = useState(0);
 
     function handleContar() {
-    const valoradicionar = contador + 1;
-    setContador(valoradicionar);
+    setContador(contador + 1);
     }
 
     return(

@@ -1,0 +1,24 @@
+#Botao {
+    width: 100px;
+    height: 50px;
+    margin: 10px;
+    background-color: green;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+}
+
+#Caixa {
+    margin: 15px
+}
+
+#valorchave {
+    margin: 15px;
+}
+#Remove {
+    background-color: brown;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+    width: 100px;
+    height: 50px;
+    margin: 10px;
+}

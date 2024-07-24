@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-
+import { useContext, useEffect, useState } from "react";
+import { ShoppingContext } from "../Contexto/ShoppingContext";
 
 const produtos = ['feijão', 'calabresa', 'cheetos']
 
@@ -16,8 +16,8 @@ export function useShoppingList() {
         if (armazenado) {
             setlistaProdutos(JSON.parse(armazenado))
         }
-        
     }, []);
+
     function handleProductName(event) {
         setProduto(event.target.value)
     };
@@ -26,7 +26,7 @@ export function useShoppingList() {
         const listaAtualizada = [...listaProdutos, produto];
         if (produto !== "") {
             return (
-                localStorage.setItem(JSON.stringify(listaAtualizada)),
+                localStorage.setItem("list", JSON.stringify(listaAtualizada)),
                 setlistaProdutos(listaAtualizada),
                 setProduto("")
             )
@@ -40,18 +40,21 @@ export function useShoppingList() {
     function validate() {
         if (produto === "") {
             console.log(mensagemErro)
-                setMensagemErro("Preencha o nome do produto")
+            setMensagemErro("Preencha o nome do produto")
         }
         setMensagemErro("")
-    }
-    return {
-        objeto,
-        setObjeto,
-        listaProdutos,
-        produto,
-        mensagemErro,
-        handleProductName,
-        addProduct,
-        validate,
     };
-}
+    
+    return (
+        {
+            objeto,
+            setObjeto,
+            listaProdutos,
+            produto,
+            mensagemErro,
+            handleProductName,
+            addProduct,
+            validate,
+        }
+    )
+};
